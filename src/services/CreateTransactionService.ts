@@ -15,7 +15,7 @@ class CreateTransactionService {
 
   public execute({ title, type, value }: RequestDTO): Transaction {
     if (type === 'outcome') {
-      if (this.transactionsRepository.getBalance().total <= 0 && value > 0) {
+      if (this.transactionsRepository.getBalance().total < value) {
         throw new Error(
           'The outcome value of this operation has exceeded the income values',
         );
